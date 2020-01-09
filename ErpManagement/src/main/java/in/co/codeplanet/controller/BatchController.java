@@ -76,6 +76,7 @@ public class BatchController {
 			return "index";
 		}
 	}
+	
 	@RequestMapping(value="deletebatch")
 	public String deletebatch(HttpServletRequest request,Batch batch, HttpSession session)
 	{
@@ -99,6 +100,7 @@ public class BatchController {
 		}
 
 	}
+	
 	@RequestMapping(value="activeBatch")
 	public String activeBatch(HttpServletRequest request,Batch batch, HttpSession session)
 	{

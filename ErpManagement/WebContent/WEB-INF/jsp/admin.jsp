@@ -239,6 +239,36 @@
 									</div>
 								</form>
 							</div>
+							<div class="col-lg-5 ml-auto" data-aos="fade-up"
+								data-aos-delay="500">
+								<form action="register" method="post">
+									<input type="hidden" name="createdBy" value="${createdBy }">
+									<div class="form-group">
+										<input type="submit" class="btn btn-danger btn-pill"
+											value="Register Student" style="width: 300px; height: 50px;">
+									</div>
+								</form>
+							</div>
+							<div class="col-lg-5 ml-auto" data-aos="fade-up"
+								data-aos-delay="500">
+								<form action="enroll" method="post">
+									<input type="hidden" name="createdBy" value="${createdBy }">
+									<div class="form-group">
+										<input type="submit" class="btn btn-danger btn-pill"
+											value="Enroll Student" style="width: 300px; height: 50px;">
+									</div>
+								</form>
+							</div>
+							<div class="col-lg-5 ml-auto" data-aos="fade-up"
+								data-aos-delay="500">
+								<form action="feeDetails" method="post">
+									<input type="hidden" name="createdBy" value="${createdBy }">
+									<div class="form-group">
+										<input type="submit" class="btn btn-danger btn-pill"
+											value="Fee Submission Details" style="width: 300px; height: 50px;">
+									</div>
+								</form>
+							</div>
 						</div>
 					</div>
 
