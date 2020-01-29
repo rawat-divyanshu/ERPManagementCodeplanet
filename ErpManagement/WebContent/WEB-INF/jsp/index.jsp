@@ -46,7 +46,6 @@
 		 alert("Please Enter password and confirm password equal!!");
 		 return false;
 		 }
-	 
  }
 </script>
   

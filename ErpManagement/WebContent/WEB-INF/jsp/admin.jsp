@@ -269,6 +269,16 @@
 									</div>
 								</form>
 							</div>
+							<div class="col-lg-5 ml-auto" data-aos="fade-up"
+								data-aos-delay="500">
+								<form action="attendanceDetails" method="post">
+									<input type="hidden" name="createdBy" value="${createdBy }">
+									<div class="form-group">
+										<input type="submit" class="btn btn-danger btn-pill"
+											value="Attendance Details" style="width: 300px; height: 50px;">
+									</div>
+								</form>
+							</div>
 						</div>
 					</div>
 

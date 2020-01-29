@@ -41,35 +41,93 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Edit Course
-						details</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Pay Fee</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
 				<div class="modal-body">
-					<form action="updateCourse" method="post">
+					<form action="payfee" method="post">
 						<input type="hidden" id="ebid" name="courseId">
-						<div class="form-group">
-							<label for="ebname">Course Name</label> <input type="text"
-								class="form-control" id="ebname" name="courseName" required
-								aria-describedby="Course name" placeholder="Edit Book Name">
-						</div>
-						<div class="form-group">
-							<label for="ebauthor">Course Description</label> <input
-								type="text" class="form-control" id="ebauthor"
-								name="courseDescription" required
-								placeholder="course Description">
-						</div>
-						<div class="form-group">
-							<label for="ebpublisher">Course Fee</label> <input type="text"
-								class="form-control" id="ebpublisher" name="courseFee" required
-								placeholder="Course Fee">
-						</div>
-						<input type="hidden" name="modifiedBy" value="${createdBy }">
 
-						<button type="submit" class="btn btn-primary">Update</button>
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="">Student Name</label>
+							<div class="col-md-5">
+								<input id="" name="" type="text" placeholder=""
+									class="form-control input-md" required="">
+
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="">Email ID</label>
+							<div class="col-md-5">
+								<input id="" name="" type="text" placeholder=""
+									class="form-control input-md" required="">
+
+							</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="">Course Name</label>
+							<div class="col-md-5">
+								<input id="" name="" type="text" placeholder=""
+									class="form-control input-md" required="">
+
+							</div>
+						</div>
+
+						<!-- Text input-->
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="">Course Fee</label>
+							<div class="col-md-5">
+								<input id="" name="" type="text" placeholder=""
+									class="form-control input-md" required="">
+
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="">Amount Paid</label>
+							<div class="col-md-4">
+								<input id="" name="" type="text" placeholder=""
+									class="form-control input-md" required="">
+
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="">Amount
+								Remaining</label>
+							<div class="col-md-4">
+								<input id="" name="" type="text" placeholder=""
+									class="form-control input-md" required="">
+
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<label class="col-md-4 control-label" for="">Amount
+								Paying</label>
+							<div class="col-md-5">
+								<input id="" name="" type="text" placeholder=""
+									class="form-control input-md" required="">
+
+							</div>
+						</div>
+
+
+						<div class="form-group">
+							<label class="col-md-4 control-label" for=""></label>
+							<div class="col-md-4">
+								<button id="" name="" class="btn btn-primary">Pay
+									Amount</button>
+							</div>
+						</div>
 					</form>
 				</div>
 			</div>

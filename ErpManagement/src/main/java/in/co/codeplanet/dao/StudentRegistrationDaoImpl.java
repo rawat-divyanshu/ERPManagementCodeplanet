@@ -19,7 +19,7 @@ public class StudentRegistrationDaoImpl implements StudentRegistrationDao {
 	@Override
 	public int registerStudent(StudentDetails studentDetails) {
 		int addStatus;
-		final String procedureCall = "{call register(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+		final String procedureCall = "{call register(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
 		Connection connection = null;
 		try {
 			connection = jdbcTemplate.getDataSource().getConnection();
@@ -45,6 +45,7 @@ public class StudentRegistrationDaoImpl implements StudentRegistrationDao {
 			callableSt.setString(18, null);
 			callableSt.setString(19, null);
 			callableSt.setString(20, null);
+			callableSt.setString(21, null);
 			
 			addStatus = callableSt.executeUpdate();
 
@@ -65,7 +66,7 @@ public class StudentRegistrationDaoImpl implements StudentRegistrationDao {
 	@Override
 	public int enrollStudent(EnrollStudent enrollStudent) {
 		int enrollStatus;
-		final String procedureCall = "{call register(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
+		final String procedureCall = "{call register(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
 		Connection connection = null;
 		try {
 			connection = jdbcTemplate.getDataSource().getConnection();
@@ -91,7 +92,12 @@ public class StudentRegistrationDaoImpl implements StudentRegistrationDao {
 			callableSt.setDouble(18, Double.parseDouble(enrollStudent.getCourseFee()));
 			callableSt.setInt(19, Integer.parseInt(enrollStudent.getFeePaymentType()));
 			callableSt.setDouble(20, Double.parseDouble(enrollStudent.getAmountDeposited()));
-			
+			if(Double.parseDouble(enrollStudent.getCourseFee()) == Double.parseDouble(enrollStudent.getAmountDeposited())) {
+				callableSt.setInt(21, 1);
+			}
+			else {
+				callableSt.setInt(21, 0);				
+			}
 			enrollStatus = callableSt.executeUpdate();
 			
 
