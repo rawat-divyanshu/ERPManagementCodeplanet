@@ -7,6 +7,6 @@ public interface StudentRegistrationDao {
 
 	int registerStudent(StudentDetails studentDetails);
 
-	int enrollStudent(EnrollStudent studentDetails);
+	int enrollStudent(EnrollStudent enrollStudent);
 
 }

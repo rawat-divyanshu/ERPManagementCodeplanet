@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import in.co.codeplanet.model.EnrollStudent;
+import in.co.codeplanet.model.FeePaymentOutput;
 import in.co.codeplanet.service.FeeSubmissionService;
 
 @Controller
@@ -42,9 +43,36 @@ public class FeeSubmissionController {
 				enrollStudent.setFeeStatus("0");
 			}
 			
-			int i = feeSubmissionService.payFee(enrollStudent);
+			FeePaymentOutput paymentDetails = feeSubmissionService.payFee(enrollStudent);
+			request.setAttribute("paymentDetails", paymentDetails);
 			
-			return "redirect:feeDetails";
+			return "feeReceipt";
+		} else {
+			return "index";
+		}
+	}
+	
+	@RequestMapping(value = "studentFeeDetails", method = RequestMethod.POST)
+	public String studentFeeDetails(HttpServletRequest request, HttpSession session, EnrollStudent enrollStudent) {
+		if((String) session.getAttribute("createdBy") !=  null) {
+			request.setAttribute("createdBy", (String) session.getAttribute("createdBy"));
+			List<EnrollStudent> studentFeeDetail = feeSubmissionService.getFeeDetails(enrollStudent.getEmailId());
+			List<EnrollStudent> l = feeSubmissionService.getFeeDetails(enrollStudent);
+			request.setAttribute("enrolledStudents", l);
+			request.setAttribute("studentFeeDetail", studentFeeDetail);
+			request.setAttribute("studentSearch", "1");
+			return "StudentFeeDetails";
+		} else {
+			return "index";
+		}
+	}
+	
+	@RequestMapping(value = "generateFeeReceipt", method = RequestMethod.POST)
+	public String generateFeeReceipt(HttpServletRequest request, HttpSession session, EnrollStudent enrollStudent) {
+		if((String) session.getAttribute("createdBy") !=  null) {
+			request.setAttribute("createdBy", (String) session.getAttribute("createdBy"));
+			List<FeePaymentOutput> paymentDetails= feeSubmissionService.generateFeeReceipt(enrollStudent);
+			return "generatedFeeReceipt";
 		} else {
 			return "index";
 		}

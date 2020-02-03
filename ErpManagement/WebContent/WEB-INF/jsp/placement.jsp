@@ -18,7 +18,8 @@
 <title>admin</title>
 </head>
 <script>
-	function modalOpen(placementId, studentEmail, placedInCompany, ctc, selectionType, placementYear, jobProfile) {
+	function modalOpen(placementId, studentEmail, placedInCompany, ctc,
+			selectionType, placementYear, jobProfile) {
 		const pId = document.getElementById('placementId');
 		const sEmail = document.getElementById('studentEmail');
 		const pCompanies = document.getElementById('addCompanies');
@@ -46,7 +47,8 @@
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="exampleModalLabel">Edit Placement Details</h5>
+					<h5 class="modal-title" id="exampleModalLabel">Edit Placement
+						Details</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -59,7 +61,8 @@
 							<label for="studentEmail">Student Registered EMail-ID</label> <input
 								type="text" required class="form-control" id="studentEmail"
 								name="studentEmail" aria-describedby="Student Email"
-								placeholder="Student's Registered Email-ID" required autofocus readonly>
+								placeholder="Student's Registered Email-ID" required autofocus
+								readonly>
 						</div>
 						<div class="form-group">
 							<label for="addCompanies">Placed in Company(/Companies)</label> <input
@@ -73,17 +76,20 @@
 								class="form-control" id="ctc" name="ctc" placeholder="0">
 						</div>
 						<div class="form-group">
-							<label for="selectionType">Selection Type</label> <select id="selectionType" name="selectionType">
+							<label for="selectionType">Selection Type</label> <select
+								id="selectionType" name="selectionType">
 								<option value="OnCampus">OnCampus</option>
 								<option value="OffCampus">OffCampus</option>
 							</select>
 						</div>
 						<div class="form-group">
-							<label for="jobProfile">Job Profile</label> <input type="text" required
-								class="form-control" id="jobProfile" name="jobProfile" placeholder="Add Job Profile">
+							<label for="jobProfile">Job Profile</label> <input type="text"
+								required class="form-control" id="jobProfile" name="jobProfile"
+								placeholder="Add Job Profile">
 						</div>
 						<div class="form-group">
-							<label for="yearofplacement">Year Of Placement</label> <select id="yearofplacement" name="placementYear">
+							<label for="yearofplacement">Year Of Placement</label> <select
+								id="yearofplacement" name="placementYear">
 								<option value="2017">2017</option>
 								<option value="2018">2018</option>
 								<option value="2019">2019</option>
@@ -91,7 +97,8 @@
 							</select>
 						</div>
 						<input type="hidden" name="createdBy" value="${createdBy }">
-						<button type="submit" class="btn btn-primary">Update Details</button>
+						<button type="submit" class="btn btn-primary">Update
+							Details</button>
 					</form>
 				</div>
 			</div>
@@ -130,17 +137,20 @@
 								class="form-control" id="ctc" name="ctc" placeholder="0">
 						</div>
 						<div class="form-group">
-							<label for="ctc">Selection Type</label> <select id="ctc" name="selectionType">
+							<label for="ctc">Selection Type</label> <select id="ctc"
+								name="selectionType">
 								<option value="OnCampus">OnCampus</option>
 								<option value="OffCampus">OffCampus</option>
 							</select>
 						</div>
 						<div class="form-group">
-							<label for="jobProfile">Job Profile</label> <input type="text" required
-								class="form-control" id="jobProfile" name="jobProfile" placeholder="Add Job Profile">
+							<label for="jobProfile">Job Profile</label> <input type="text"
+								required class="form-control" id="jobProfile" name="jobProfile"
+								placeholder="Add Job Profile">
 						</div>
 						<div class="form-group">
-							<label for="yearofplacement">Year Of Placement</label> <select id="yearofplacement" name="placementYear">
+							<label for="yearofplacement">Year Of Placement</label> <select
+								id="yearofplacement" name="placementYear">
 								<option value="2017">2017</option>
 								<option value="2018">2018</option>
 								<option value="2019">2019</option>
@@ -148,7 +158,8 @@
 							</select>
 						</div>
 						<input type="hidden" name="createdBy" value="${createdBy }">
-						<button type="submit" class="btn btn-primary">Add Placement Detail</button>
+						<button type="submit" class="btn btn-primary">Add
+							Placement Detail</button>
 					</form>
 				</div>
 			</div>
@@ -181,7 +192,7 @@
 						<td>${l.jobProfile }</td>
 						<td>${l.selectionType }</td>
 						<td>${l.placementYear }</td>
-						 <td>
+						<td>
 							<button type="button" class="btn btn-primary"
 								onClick="modalOpen('${l.placementId}','${l.studentEmail}','${l.placedInCompany}','${l.ctc}','${l.selectionType }','${l.placementYear }','${l.jobProfile }')"
 								data-toggle="modal">Edit</button>
@@ -189,7 +200,8 @@
 						<td>
 							<form action="deletePlacementDetail">
 								<input type="hidden" name="createdBy" value="${l.createdBy }">
-								<input type="hidden" name="placementId" value="${l.placementId }" />
+								<input type="hidden" name="placementId"
+									value="${l.placementId }" />
 								<button type="submit" class="btn btn-danger">Delete</button>
 							</form>
 						</td>
@@ -231,6 +243,14 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
-
+	<div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="500">
+		<form action="dashboard" method="post">
+			<input type="hidden" name="createdBy" value="${createdBy }">
+			<div class="form-group">
+				<input type="submit" class="btn btn-danger btn-pill"
+					value="Return to DashBoard" style="width: 300px; height: 50px;">
+			</div>
+		</form>
+	</div>
 </body>
 </html>

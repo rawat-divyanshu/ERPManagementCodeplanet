@@ -45,10 +45,10 @@
 		<div class="card">
 
 			<h5 class="card-header info-color white-text text-center py-4">
-				<strong>Student Details's</strong>
+				<strong>Student Detail's</strong>
 			</h5>
-			
-			
+
+
 			<c:set var="status" scope="session" value="${status}" />
 			<c:choose>
 				<c:when test="${status == 1}">
@@ -75,15 +75,15 @@
 					action="registerStudent">
 					<br> <label for="materialRegisterFormFirstName">StudentName</label>
 					<input type="text" id="materialRegisterFormFirstName"
-						class="form-control" name="studentName"> <label
-						for="materialRegisterFormLastName">Father's name</label> <input
+						class="form-control" name="studentName"> 
+						<label for="materialRegisterFormLastName">Father's name</label> <input
 						type="text" id="materialRegisterFormLastName" class="form-control"
-						name="fatherName"> <label for="materialRegisterFormEmail">E-mail</label>
-					<input type="email" id="materialRegisterFormEmail"
-						class="form-control" name="emailId"> <label
-						for="materialRegisterFormPhone">Phone number</label> <input
-						type="text" id="materialRegisterFormFirstName"
-						class="form-control" name="mobileNo"> <label
+						name="fatherName">
+						<label for="materialRegisterFormEmail">E-mail</label>
+						<input type="email" id="materialRegisterFormEmail"
+						class="form-control" name="emailId">
+						<label for="materialRegisterFormPhone">Phone number</label> <input
+						type="text" id="materialRegisterFormPhone" class="form-control" name="mobileNo"> <label
 						for="materialRegisterFormCollege">College name</label> <input
 						type="text" id="materialRegisterFormCollege" class="form-control"
 						name="collegeName"> <br>
@@ -126,5 +126,16 @@
 			</div>
 		</div>
 	</div>
+	</div>
+	<br>
+	<center><div data-aos="fade-up" data-aos-delay="500">
+		<form action="dashboard" method="post">
+			<input type="hidden" name="createdBy" value="${createdBy }">
+			<div class="form-group">
+				<input type="submit" class="btn btn-danger btn-pill"
+					value="Return to DashBoard" style="width: 300px; height: 50px;">
+			</div>
+		</form>
+	</div></center>
 </body>
 </html>

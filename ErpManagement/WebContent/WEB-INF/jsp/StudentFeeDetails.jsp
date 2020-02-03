@@ -30,7 +30,6 @@
 	function modalOpen(enrollmentId, studentName, emailId, courseName,
 			courseFee, amountDeposited, amountRemaining) {
 
-		console.log("Model khol diya");
 		const eid = document.getElementById("eid");
 		const sname = document.getElementById("sname");
 		const emid = document.getElementById("emid");
@@ -38,8 +37,7 @@
 		const cfee = document.getElementById("cfee");
 		const adep = document.getElementById("adep");
 		const arem = document.getElementById("arem");
-	
-		
+
 		eid.value = enrollmentId;
 		sname.value = studentName;
 		emid.value = emailId;
@@ -47,8 +45,6 @@
 		cfee.value = courseFee;
 		adep.value = amountDeposited;
 		arem.value = amountRemaining;
-
-		
 
 		$('#payFeeModal').modal();
 
@@ -174,7 +170,96 @@
 		</div>
 	</div>
 	<div class="container p-3 my-3 border">
-		<div id="feeTable" style="display: none;">
+		<div id="unpaidFeeTable" style="display: none;">
+			<table id="tablePreview"
+				class="table table-striped table-hover table-bordered table-sm">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Student Name</th>
+						<th>Course Enrolled</th>
+						<th>Batch</th>
+						<th>Total Fee</th>
+						<th>Amount Paid</th>
+						<th>Amount Remaining</th>
+						<th>Fee Status</th>
+						<th>#</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${enrolledStudents }" var="l" varStatus="loop">
+						<c:if test="${l.feeStatus == 0 }">
+							<tr>
+								<th scope="row">#</th>
+								<td>${l.studentName }</td>
+								<td>${l.courseName }</td>
+								<td>${l.batchName }</td>
+								<td>${l.courseFee }</td>
+								<td>${l.amountDeposited }</td>
+								<td>${l.amountRemaining }</td>
+								<td><span class="badge badge-danger">Unpaid</span></td>
+								<td><button type="button" class="btn btn-primary" disabled>Pay
+										Fee</button></td>
+							</tr>
+						</c:if>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+
+		<div id="paidFeeTable" style="display: none;">
+			<table id="tablePreview"
+				class="table table-striped table-hover table-bordered table-sm">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Student Name</th>
+						<th>Course Enrolled</th>
+						<th>Batch</th>
+						<th>Total Fee</th>
+						<th>Amount Paid</th>
+						<th>Amount Remaining</th>
+						<th>Fee Status</th>
+						<th>#</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${enrolledStudents }" var="l" varStatus="loop">
+						<c:if test="${l.feeStatus == 1 }">
+							<tr>
+								<th scope="row">#</th>
+								<td>${l.studentName }</td>
+								<td>${l.courseName }</td>
+								<td>${l.batchName }</td>
+								<td>${l.courseFee }</td>
+								<td>${l.amountDeposited }</td>
+								<td>${l.amountRemaining }</td>
+								<td><span class="badge badge-success">Paid</span></td>
+								<td>
+									<form action="#">
+										<c:choose>
+											<c:when test="${l.feeStatus == 1 }">
+												<button type="button" class="btn btn-primary" disabled>Pay
+													Fee</button>
+											</c:when>
+											<c:when test="${l.feeStatus == 0 }">
+												<button type="button" class="btn btn-primary"
+													onClick="modalOpen('${l.enrollmentId }','${l.studentName}','${l.emailId }','${l.courseName}','${l.courseFee}','${l.amountDeposited }','${l.amountRemaining }')"
+													data-toggle="modal">Pay Fee</button>
+												<input type="hidden" name="enrollmentId"
+													value="${l.enrollmentId }" />
+											</c:when>
+										</c:choose>
+									</form>
+								</td>
+							</tr>
+						</c:if>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+
+		<div id="allFeeTable" style="display: none;">
 			<table id="tablePreview"
 				class="table table-striped table-hover table-bordered table-sm">
 				<thead>
@@ -228,29 +313,96 @@
 				</tbody>
 			</table>
 		</div>
-		<div id="submitFee">
-			<form>
-				<fieldset>
-					<div class="form-group">
-						<label class="col-md-4 control-label" for="textinput">Student
-							E-Mail ID</label>
-						<div class="col-md-5">
-							<input id="textinput" name="textinput" type="text"
-								placeholder="Student Email Address"
-								class="form-control input-md" required>
 
-						</div>
+
+		<div id="submitFee">
+			<form action="studentFeeDetails" method="post">
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="textinput">Student
+						E-Mail ID</label>
+					<div class="col-md-5">
+						<input id="textinput" name="emailId" type="text"
+							placeholder="Student Email Address" class="form-control input-md"
+							required>
+
 					</div>
-					<div class="form-group">
-						<label class="col-md-4 control-label" for=""></label>
-						<div class="col-md-4">
-							<button id="" name="" class="btn btn-primary">Get Fee
-								Details</button>
-						</div>
+				</div>
+				<input type="hidden" name="createdBy" value="${createdBy }">
+				<div class="form-group">
+					<label class="col-md-4 control-label" for=""></label>
+					<div class="col-md-4">
+						<button type="submit" name="" class="btn btn-primary">Get
+							Fee Details</button>
 					</div>
-				</fieldset>
+				</div>
+
 			</form>
+			<c:if test="${studentSearch == 1 }">
+				<div id="studentFeeDetail">
+					<table id="tablePreview"
+						class="table table-striped table-hover table-bordered table-sm">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Student Name</th>
+								<th>Course Enrolled</th>
+								<th>Batch</th>
+								<th>Total Fee</th>
+								<th>Amount Paid</th>
+								<th>Amount Remaining</th>
+								<th>Fee Status</th>
+								<th>#</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:forEach items="${studentFeeDetail }" var="l" varStatus="loop">
+								<tr>
+									<th scope="row">#</th>
+									<td>${l.studentName }</td>
+									<td>${l.courseName }</td>
+									<td>${l.batchName }</td>
+									<td>${l.courseFee }</td>
+									<td>${l.amountDeposited }</td>
+									<td>${l.amountRemaining }</td>
+									<td><c:choose>
+											<c:when test="${l.feeStatus == 1}">
+												<span class="badge badge-success">Paid</span>
+											</c:when>
+											<c:otherwise>
+												<span class="badge badge-danger">Unpaid</span>
+											</c:otherwise>
+										</c:choose></td>
+									<td><form action="#">
+											<c:choose>
+												<c:when test="${l.feeStatus == 1 }">
+													<button type="button" class="btn btn-primary" disabled>Pay
+														Fee</button>
+												</c:when>
+												<c:when test="${l.feeStatus == 0 }">
+													<button type="button" class="btn btn-primary"
+														onClick="modalOpen('${l.enrollmentId }','${l.studentName}','${l.emailId }','${l.courseName}','${l.courseFee}','${l.amountDeposited }','${l.amountRemaining }')"
+														data-toggle="modal">Pay Fee</button>
+													<input type="hidden" name="enrollmentId"
+														value="${l.enrollmentId }" />
+												</c:when>
+											</c:choose>
+										</form></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+				</div>
+			</c:if>
 		</div>
+	</div>
+	<div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="500">
+		<form action="dashboard" method="post">
+			<input type="hidden" name="createdBy" value="${createdBy }">
+			<div class="form-group">
+				<input type="submit" class="btn btn-danger btn-pill" value="Return to DashBoard"
+					style="width: 300px; height: 50px;">
+			</div>
+		</form>
 	</div>
 
 	<script>
@@ -258,25 +410,28 @@
 			console.log(e.target.value);
 			switch (e.target.value) {
 			case "0":
+				document.getElementById("allFeeTable").style.display = "none";
+				document.getElementById("paidFeeTable").style.display = "none";
 				document.getElementById("submitFee").style.display = "none";
-				document.getElementById("feeTable").style.display = "block";
-				document.getElemenrById("feeTable").innerHTML = '<c:set var="opt" value="1" scope="request"/>'
-				document.getElementById("option").value = "0";
+				document.getElementById("unpaidFeeTable").style.display = "block";
 				break;
 			case "1":
+				document.getElementById("allFeeTable").style.display = "none";
+				document.getElementById("paidFeeTable").style.display = "block";
 				document.getElementById("submitFee").style.display = "none";
-				document.getElementById("feeTable").style.display = "block";
-				document.getElementById("option").value = "1";
+				document.getElementById("unpaidFeeTable").style.display = "none";
 				break;
 			case "2":
+				document.getElementById("allFeeTable").style.display = "block";
+				document.getElementById("paidFeeTable").style.display = "none";
 				document.getElementById("submitFee").style.display = "none";
-				document.getElementById("feeTable").style.display = "block";
-				document.getElementById("option").value = "2";
+				document.getElementById("unpaidFeeTable").style.display = "none";
 				break;
 			default:
-				document.getElementById("feeTable").style.display = "none";
+				document.getElementById("allFeeTable").style.display = "none";
+				document.getElementById("paidFeeTable").style.display = "none";
 				document.getElementById("submitFee").style.display = "block";
-				document.getElementById("option").value = "3";
+				document.getElementById("unpaidFeeTable").style.display = "none";
 			}
 		}
 	</script>

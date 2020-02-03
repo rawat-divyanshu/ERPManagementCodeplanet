@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import in.co.codeplanet.model.SessionBean;
 import in.co.codeplanet.model.User_Details;
@@ -64,6 +65,16 @@ public class LoginController {
 			}
 		}
 
+	}
+	
+	@RequestMapping(value="dashboard", method = RequestMethod.POST)
+	public String dashboard(HttpServletRequest request, HttpSession session) {
+		if((String) session.getAttribute("createdBy") !=  null) {
+			request.setAttribute("createdBy", (String) session.getAttribute("createdBy"));
+			return "admin";
+		} else {
+			return "index";
+		}
 	}
 
 }

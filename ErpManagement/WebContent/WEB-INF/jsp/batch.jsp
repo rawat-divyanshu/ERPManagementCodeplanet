@@ -222,6 +222,14 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
-
+	<div class="col-lg-5 ml-auto" data-aos="fade-up" data-aos-delay="500">
+		<form action="dashboard" method="post">
+			<input type="hidden" name="createdBy" value="${createdBy }">
+			<div class="form-group">
+				<input type="submit" class="btn btn-danger btn-pill"
+					value="Return to DashBoard" style="width: 300px; height: 50px;">
+			</div>
+		</form>
+	</div>
 </body>
 </html>

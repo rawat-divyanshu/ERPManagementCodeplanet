@@ -12,7 +12,12 @@ public class AttendanceController {
 	
 	@RequestMapping(value = "attendanceDetails", method = RequestMethod.POST)
 	public String attendanceDetails(HttpServletRequest request, HttpSession session) {
-		return "batchSelection";
+		if((String) session.getAttribute("createdBy") != null) {
+			return "batchSelection";
+		} else {
+			return "index";
+		}
+		
 	}
 
 }

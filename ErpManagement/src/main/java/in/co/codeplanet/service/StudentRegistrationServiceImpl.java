@@ -19,8 +19,8 @@ public class StudentRegistrationServiceImpl implements StudentRegistrationServic
 	}
 
 	@Override
-	public int enrollStudent(EnrollStudent studentDetails) {
-		return studentRegistrationDao.enrollStudent(studentDetails);
+	public int enrollStudent(EnrollStudent enrollStudent) {
+		return studentRegistrationDao.enrollStudent(enrollStudent);
 	}
 
 }

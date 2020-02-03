@@ -2,6 +2,7 @@ package in.co.codeplanet.dao;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
+import java.sql.ResultSet;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -63,16 +64,17 @@ public class StudentRegistrationDaoImpl implements StudentRegistrationDao {
 		return addStatus;
 	}
 
+
 	@Override
 	public int enrollStudent(EnrollStudent enrollStudent) {
-		int enrollStatus;
+		int enrollmentId = 0;
 		final String procedureCall = "{call register(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}";
 		Connection connection = null;
 		try {
 			connection = jdbcTemplate.getDataSource().getConnection();
 			connection.setAutoCommit(false);
 			CallableStatement callableSt = connection.prepareCall(procedureCall);
-			callableSt.setString(1, "enrollStudent");			
+			callableSt.setString(1, "enrollStudentNew");			
 			callableSt.setString(2, null);			
 			callableSt.setString(3, null);			
 			callableSt.setString(4, null);			
@@ -86,25 +88,27 @@ public class StudentRegistrationDaoImpl implements StudentRegistrationDao {
 			callableSt.setString(12, null);			
 			callableSt.setString(13, null);			
 			callableSt.setString(14, null);			
-			callableSt.setInt(15, Integer.parseInt(enrollStudent.getCreatedBy()));
+			callableSt.setInt(15, Integer.parseInt(enrollStudent.getCreatedBy()));	
 			callableSt.setInt(16, Integer.parseInt(enrollStudent.getCourseId()));
 			callableSt.setInt(17, Integer.parseInt(enrollStudent.getBatchId()));
 			callableSt.setDouble(18, Double.parseDouble(enrollStudent.getCourseFee()));
 			callableSt.setInt(19, Integer.parseInt(enrollStudent.getFeePaymentType()));
-			callableSt.setDouble(20, Double.parseDouble(enrollStudent.getAmountDeposited()));
-			if(Double.parseDouble(enrollStudent.getCourseFee()) == Double.parseDouble(enrollStudent.getAmountDeposited())) {
-				callableSt.setInt(21, 1);
-			}
-			else {
-				callableSt.setInt(21, 0);				
-			}
-			enrollStatus = callableSt.executeUpdate();
+			callableSt.setString(20, null);
+			callableSt.setString(21, null);	
 			
-
+			int status = callableSt.executeUpdate();
+			if(status != 0 ) {
+				ResultSet rs = callableSt.getResultSet();
+				if(rs.next()) {
+					enrollmentId = rs.getInt("Enrollment_Id");
+				}
+			} else {
+				enrollmentId = status;
+			}
 			connection.commit();
 		}
 		catch(Exception e) {
-			enrollStatus = -2;
+			enrollmentId = -2;
 			try {
 				connection.rollback();
 			} catch (Exception e1) {
@@ -112,8 +116,6 @@ public class StudentRegistrationDaoImpl implements StudentRegistrationDao {
 			}
 			e.printStackTrace();			
 		}
-		System.out.println(enrollStatus);
-		return enrollStatus;
+		return enrollmentId;
 	}
-
 }
