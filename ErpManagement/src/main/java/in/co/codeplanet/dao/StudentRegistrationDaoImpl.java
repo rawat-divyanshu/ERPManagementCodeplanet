@@ -74,7 +74,7 @@ public class StudentRegistrationDaoImpl implements StudentRegistrationDao {
 			connection = jdbcTemplate.getDataSource().getConnection();
 			connection.setAutoCommit(false);
 			CallableStatement callableSt = connection.prepareCall(procedureCall);
-			callableSt.setString(1, "enrollStudentNew");			
+			callableSt.setString(1, "enrollStudent");			
 			callableSt.setString(2, null);			
 			callableSt.setString(3, null);			
 			callableSt.setString(4, null);			
